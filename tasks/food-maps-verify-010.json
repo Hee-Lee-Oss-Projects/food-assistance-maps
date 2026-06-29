@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-verify-010",
+  "title": "Verification-log enforcement in CI (no publish without provenance + method + distinct reviewer)",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "data-governance", "devops"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The no-self-approval and no-AI-certification rules are safety invariants: a food-assistance entry must not be published as authoritative unless a human reviewer (distinct from the ingester) has confirmed the verification, and AI sessions may not self-certify human-required methods (phone-confirmed, operator-confirmed, partner-confirmed). CI enforcement makes these rules machine-checkable. Depends on food-maps-fresh-009 (the staleness/state layer) and food-maps-ci-005 (the base CI pipeline).",
+  "objective": "Add CI gates that enforce the verification-log contract: (1) block publication of any entry lacking a complete verification record (sources[], verification_method, verified_by, last_verified); (2) block entries where the approving reviewer equals the ingesting contributor (no self-approval); (3) assert that human-required verification methods (phone-confirmed, operator-confirmed, partner-confirmed) cannot be set by an automated pipeline step (must have a non-automated verified_by); (4) enforce that every published entry has a corresponding PR-tied verification-log entry in docs/verification-log.md.",
+  "acceptanceCriteria": [
+    "CI blocks publication of any entry missing sources[], verification_method, verified_by, or last_verified",
+    "CI blocks any PR where the PR author matches the verified_by attribution on entries being added or updated (no self-approval check)",
+    "CI asserts that entries with verification_method of phone-confirmed, operator-confirmed, or partner-confirmed have a verified_by that is not an automated identifier (e.g. 'CI', 'pipeline', 'automated')",
+    "CI enforces that every newly added or updated entry in data/ has a corresponding entry in docs/verification-log.md referencing the PR number and commit SHA",
+    "Verification-log format is documented and validated in CI (schema or structure check)",
+    "Unit tests cover: an entry with complete provenance and a distinct reviewer passes; an entry missing verified_by fails; a self-approved entry fails; a pipeline-set phone-confirmed method fails",
+    "CI gate produces a clear, actionable error message explaining which entries failed and why"
+  ],
+  "resources": [
+    "tasks/food-maps-fresh-009.json",
+    "tasks/food-maps-ci-005.json",
+    "tasks/food-maps-schema-001.json"
+  ],
+  "output": "src/ci/verify-gate.ts + updated .github/workflows/ci.yml with the verification-log enforcement gate, passing on the pilot dataset.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

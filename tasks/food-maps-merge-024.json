@@ -1,0 +1,33 @@
+{
+  "id": "food-maps-merge-024",
+  "title": "Coordinate schema and verification engine with community-resource-maps to avoid forking",
+  "project": "food-assistance-maps",
+  "type": "design-spec",
+  "lane": "donated",
+  "priority": "low",
+  "domain": ["food-security", "open-data", "data-engineering", "data-governance"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "food-assistance-maps (Track 10) and community-resource-maps (Track 6) share significant overlap in schema, ingestion, verification, and freshness pipeline design. Running two separate implementations of the HSDS + provenance/freshness schema and the verification engine would waste effort and create drift. Per PLAN.md §12 and §Open questions, the two projects should coordinate to share a single schema/verification engine rather than fork. This task defines the coordination outcome and the shared package boundary.",
+  "objective": "Coordinate with the community-resource-maps maintainers to assess the feasibility and shape of a shared schema + verification engine. Produce a design document that: (1) compares the two projects' schemas and verification requirements; (2) proposes a shared package boundary (e.g. a shared @elyos/hsds-core library) or a clear divergence decision with rationale; (3) identifies what must remain project-specific vs. what can be shared; and (4) records the agreed-upon outcome so both projects can proceed without silent forking.",
+  "acceptanceCriteria": [
+    "Schema comparison documents the HSDS fields, provenance/freshness extensions, and any project-specific additions used by both food-assistance-maps and community-resource-maps",
+    "Design document proposes either: (a) a shared @elyos/hsds-core (or equivalent) package containing the shared schema, types, and validation; or (b) an explicit decision to keep separate implementations with a documented rationale",
+    "If a shared package is proposed, the package boundary is defined: what is shared (schema, types, ajv validator, staleness machine logic) vs. what is project-specific (adapters, domain fields)",
+    "Both project maintainers (or their representatives) have reviewed and agreed on the proposed coordination outcome",
+    "The agreed outcome is recorded in this project's ADR log and cross-referenced in community-resource-maps",
+    "No code is forked silently — if both projects proceed independently, the design document records this explicitly"
+  ],
+  "resources": [
+    "tasks/food-maps-schema-001.json",
+    "PLAN.md",
+    "https://github.com/Elyos-Projects/community-resource-maps"
+  ],
+  "output": "docs/adr/adr-007-schema-coordination.md (coordination design document and outcome decision).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

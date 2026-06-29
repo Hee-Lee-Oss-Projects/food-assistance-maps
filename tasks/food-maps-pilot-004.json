@@ -1,0 +1,42 @@
+{
+  "id": "food-maps-pilot-004",
+  "title": "Pilot ingest, geocode, dedupe, and verify ~25–50 entries in one locality with full provenance",
+  "project": "food-assistance-maps",
+  "type": "data",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "data-engineering", "civic-tech"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "The pilot is the project's first published slice of real data and the proof of concept for the entire verification + freshness pipeline. A wrong or stale entry harms food-insecure people who may travel to a closed or moved site. Every entry must clear the verification policy (one authoritative source OR ≥2 independent signals), have a human-attributed verification for human-required methods, carry complete provenance (sources[], data_license, last_verified), and pass the operator-PII review. Depends on food-maps-schema-001 (schema) and food-maps-registry-003 (cleared sources).",
+  "objective": "Ingest, geocode (open geocoder, confidence recorded), deduplicate (precedence rule + full source trail), verify, and publish ~25–50 food-assistance service entries for one locality. Each entry must: clear the verification policy with a recorded verification_method and verified_by; carry complete sources[] with license; have last_verified set by a human for human-required methods; have a correct per-record data_license; and pass the operator-PII review (pii_review set; opt-out/approximate-area applied where a private individual's address or phone is implicated). Closed/moved sites are marked, not dropped silently; low-confidence geocodes are flagged for review.",
+  "acceptanceCriteria": [
+    "25–50 food-assistance service entries (food banks, pantries, community fridges, soup kitchens, or meal programs) ingested for a single defined locality",
+    "Every published entry has complete sources[] with name, URL, license, retrievedDate, attribution, and shareAlike flag",
+    "Every published entry has a valid verification_method; human-required methods (phone-confirmed, operator-confirmed, partner-confirmed) carry a human verified_by attribution — no AI self-certification",
+    "Every entry has last_verified set within the freshness SLA and a reverify_due date",
+    "Every entry has a correct per-record data_license (ODbL for any OSM-derived record; not relabeled CC-BY)",
+    "Every entry has pii_review recorded; entries with plausibly private individual addresses/phones use approximate-area or opt-out",
+    "Geocoding uses an open geocoder (Nominatim, Pelias, or US Census Geocoder) with geocode source and confidence recorded; low-confidence geocodes are flagged",
+    "Duplicate entries from multiple sources are deduplicated with a precedence rule and the full source trail preserved",
+    "Closed or moved sites are marked with the correct operating_status (temporarily_closed, moved, or closed) — not silently dropped",
+    "A PR-tied verification-log entry is written covering: PR #, commit SHA, entries covered, sources/licenses checked, dedup/closure/PII decisions",
+    "The reviewer who approves the PR is distinct from the contributor who ingested/verified the entries (no self-approval)",
+    "All entries pass build-time schema validation (food-maps-schema-001)"
+  ],
+  "resources": [
+    "tasks/food-maps-schema-001.json",
+    "tasks/food-maps-registry-003.json",
+    "tasks/food-maps-arch-002.json",
+    "https://docs.openreferral.org/",
+    "https://nominatim.openstreetmap.org/",
+    "https://geocoding.geo.census.gov/"
+  ],
+  "output": "data/pilot/<locality>/ containing HSDS-conformant JSON entries with full provenance + a verification-log entry appended to docs/verification-log.md.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "ODbL-1.0"
+}

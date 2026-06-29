@@ -1,0 +1,36 @@
+{
+  "id": "food-maps-extras-025",
+  "title": "Extend coverage to community fridges and school/summer meal sites with tighter freshness rules",
+  "project": "food-assistance-maps",
+  "type": "data",
+  "lane": "donated",
+  "priority": "low",
+  "domain": ["food-security", "open-data", "data-engineering", "civic-tech"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Community fridges and school/summer meal sites have highly volatile schedules — a community fridge may go offline in days; school meal programs follow academic calendars with specific start/end dates. These service types require tighter freshness SLA windows than standard food pantries and specialized ingestion (different source types, seasonal schedule handling). Extending coverage to these categories increases the directory's value for the most food-insecure populations (children, people experiencing homelessness) but only if the tighter freshness can be maintained.",
+  "objective": "Extend the food-assistance-maps dataset to include community fridges and school/summer meal sites for the covered region, with tighter freshness SLA windows appropriate to their volatile schedules. Ingest entries from cleared sources specific to these service types (e.g. community-fridge network sites, USDA summer meal site finder, school district meal program listings), apply service-type-specific SLA configuration, and verify each entry to the standard provenance + freshness + license + PII policy.",
+  "acceptanceCriteria": [
+    "Community fridge entries are ingested from cleared sources with ODbL/CC/PD license confirmation per source; each entry has operating_status, last_verified, and a tighter reverify_due (≤30 days for volatile community fridges)",
+    "School/summer meal site entries are ingested from a cleared government or USDA source; seasonal valid_from/valid_to schedule fields are populated; off-season entries are marked temporarily_closed rather than shown as active",
+    "Service-type-specific freshness SLA windows are configurable in the staleness machine (community fridges: short; school meals: calendar-aligned); the ADR from food-maps-arch-002 is updated to record these windows",
+    "Every entry clears the standard verification + license + PII gate",
+    "Closed or moved community fridges are identified and marked; entries not re-verified within the shorter SLA are withheld from the authoritative set",
+    "USDA or other government summer meal site listings are recorded with PD (or verified) license",
+    "Coverage scope is explicitly capped to the region(s) the team can actively re-verify at the tighter cadence",
+    "A random-sample accuracy check (as per food-maps-audit-015 process) is run on the new service categories"
+  ],
+  "resources": [
+    "tasks/food-maps-region-012.json",
+    "tasks/food-maps-fresh-009.json",
+    "tasks/food-maps-registry-003.json",
+    "https://www.usda.gov/topics/food-and-nutrition/child-nutrition-programs/summer-food-service-program"
+  ],
+  "output": "data/<region>/community-fridges/ and data/<region>/school-summer-meals/ (HSDS-conformant entries with tighter freshness metadata) + updated SLA configuration in the staleness machine.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "ODbL-1.0"
+}

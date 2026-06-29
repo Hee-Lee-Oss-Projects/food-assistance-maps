@@ -1,0 +1,37 @@
+{
+  "id": "food-maps-ci-005",
+  "title": "CI gates: lint, typecheck, unit, schema-validation, freshness report, no-recipient-PII/no-tracker audit",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "data-engineering", "devops"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The CI pipeline is the automated enforcement layer for food-assistance-maps' safety properties. Freshness, provenance completeness, and the absence of recipient PII are not just policies — they must be machine-checked on every commit so no bad entry can be published without triggering a build failure. The no-tracker audit requires defense in depth: a static grep is not sufficient; a runtime network-interception E2E is also required. Depends on food-maps-schema-001 for schema-validation integration.",
+  "objective": "Implement a CI pipeline (GitHub Actions or equivalent) that runs on every PR and push: (1) lint (ESLint), (2) TypeScript typecheck, (3) unit tests (Vitest), (4) build-time JSON Schema validation of every entry in data/ against the food-assistance-maps schema, (5) a freshness report (counts of entries within/over SLA, fails if threshold not met for the pilot region), and (6) a defense-in-depth no-recipient-PII/no-tracker audit combining a static field grep AND a runtime network-interception E2E that fails on any unexpected outbound request from the directory view (CSP enforced).",
+  "acceptanceCriteria": [
+    "CI runs on every PR and push to main; all gates must be green before a PR can be merged",
+    "Lint (ESLint) and TypeScript typecheck gates fail on any error",
+    "Unit tests run via Vitest; build fails on any test failure",
+    "Build-time schema validation runs ajv against every JSON entry in data/ and fails the build on any schema violation",
+    "A freshness report is generated showing count of entries within/over SLA; build fails if entries past the demote window are present in the authoritative dataset",
+    "The no-recipient-PII audit includes a static grep for PII-shaped field names (name, DOB, ssn, household, income, client_id) that fails if any such field is found in data/",
+    "The no-tracker audit includes both a static check (no tracker script URLs in the view source) AND a runtime network-interception E2E (Playwright) that fails on any unexpected outbound request from the directory view",
+    "CSP headers are enforced in the static build and verified by the E2E test",
+    "CI config is documented and the CI badge is visible in README"
+  ],
+  "resources": [
+    "tasks/food-maps-schema-001.json",
+    "https://ajv.js.org/",
+    "https://vitest.dev/",
+    "https://playwright.dev/"
+  ],
+  "output": ".github/workflows/ci.yml (CI pipeline definition) with all six gates implemented and passing on the pilot dataset.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

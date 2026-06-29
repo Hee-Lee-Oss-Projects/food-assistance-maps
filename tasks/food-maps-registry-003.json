@@ -1,0 +1,37 @@
+{
+  "id": "food-maps-registry-003",
+  "title": "Source registry + license register; clear ≥3 sources (PD/CC/ODbL/operator)",
+  "project": "food-assistance-maps",
+  "type": "research",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "licensing", "data-governance"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Before any data source can be ingested into food-assistance-maps, it must be registered in a source registry and cleared by a licensing reviewer. OpenStreetMap is ODbL (attribution + share-alike for databases); US federal government works are generally public domain; state/local portals and HSDS publishers vary and must be verified individually. A source that fails the license gate is never ingested. This register is the auditable front door of the entire pipeline and gates food-maps-pilot-004.",
+  "objective": "Produce a structured source registry and license register documenting ≥3 food-assistance data sources, each with: name, URL, license/terms, attribution string, shareAlike flag, retrieval method (API/download/scrape), PII risk assessment, and ingestible status (cleared/blocked). At least one source must be OSM (ODbL), one a US federal or state government open-data portal (PD or CC), and one an operator's own published page or an HSDS feed.",
+  "acceptanceCriteria": [
+    "≥3 sources registered with name, URL, license/terms, attribution string, shareAlike flag, retrieval method, PII risk, and ingestible status",
+    "OSM is recorded as ODbL (attribution + share-alike) with the correct attribution string '© OpenStreetMap contributors, ODbL'",
+    "At least one US federal government source is recorded as public domain (with a note that state/local portals must be verified individually)",
+    "Each HSDS feed or state/local portal has its license individually verified — not assumed open",
+    "No source whose robots.txt or terms of service forbid the intended reuse is marked ingestible",
+    "The register documents how data_license is set per source (ODbL for OSM-derived, verified license for others)",
+    "A licensing reviewer (distinct from the researcher) has signed off on each cleared source",
+    "The register is stored in a machine-readable format (JSON or CSV) alongside a human-readable summary document"
+  ],
+  "resources": [
+    "tasks/food-maps-arch-002.json",
+    "https://opendatacommons.org/licenses/odbl/",
+    "https://www.openstreetmap.org/copyright",
+    "https://docs.openreferral.org/",
+    "https://www.usda.gov/topics/food-and-nutrition/food-access"
+  ],
+  "output": "data/sources/registry.json (machine-readable source registry) + docs/license-register.md (human-readable license register summary) listing ≥3 cleared sources with complete provenance fields.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

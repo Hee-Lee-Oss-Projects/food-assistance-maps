@@ -1,0 +1,36 @@
+{
+  "id": "food-maps-funded-020",
+  "title": "Funded escrow-capped batch ingestion for a large region via packages/runner",
+  "project": "food-assistance-maps",
+  "type": "data",
+  "lane": "funded",
+  "fundedBudgetUsd": 25.0,
+  "priority": "low",
+  "domain": ["food-security", "open-data", "data-engineering", "civic-tech"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "When a priority region is too large to ingest incrementally with donated compute alone, the project may use the Elyos funded lane (packages/runner, Anthropic API key in runner env only) for a one-time escrow-capped batch ingestion run. The funded lane has a hard per-task budget cap enforced by the runner; the API key must never appear in logs, receipts, or committed files. The funded lane is optional and backlog; it activates only when a partner is secured and the region/budget are defined. The $25 cap is a placeholder — the actual cap must be set and approved by the steward before activation.",
+  "objective": "Using packages/runner under a hard per-task escrow cap, perform a large-scale batch ingestion of food-assistance entries for one priority region identified by the named partner. The run must: stay within the fundedBudgetUsd cap; produce entries that clear the same provenance + verification + license + PII gates as the donated-lane pipeline; keep the API key only in the runner environment (never logged, never committed); and hand off a staged dataset for human verification and the standard CI gate.",
+  "acceptanceCriteria": [
+    "Run uses packages/runner with a hard fundedBudgetUsd cap; the run aborts if the cap would be exceeded",
+    "API key is present only in the runner environment variable; it does not appear in any log, receipt, git commit, or CI artifact",
+    "All ingested entries are staged for human review — the batch does not bypass the verification gate or self-certify human-required verification methods",
+    "Entries produced follow the same schema and provenance requirements as the donated-lane pipeline",
+    "A cost receipt (total tokens, total spend) is recorded in the verification log alongside the PR, but contains no secrets",
+    "The batch output is reviewed and approved by a human reviewer before merging to the authoritative dataset",
+    "The fundedBudgetUsd cap and the steward's approval of the budget are documented before the task is activated",
+    "Funded lane activation is gated on: a named partner (food-maps-partner-016 complete) and a defined region and budget approved by the steward"
+  ],
+  "resources": [
+    "tasks/food-maps-partner-016.json",
+    "tasks/food-maps-ingest-007.json",
+    "PLAN.md"
+  ],
+  "output": "data/<region>/batch-staged/ (staged batch entries awaiting human verification review) + a cost receipt in docs/verification-log.md.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "ODbL-1.0"
+}

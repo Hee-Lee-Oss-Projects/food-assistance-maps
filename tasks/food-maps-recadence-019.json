@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-recadence-019",
+  "title": "Documented re-verification cadence + SLA-driven staleness sweep automation",
+  "project": "food-assistance-maps",
+  "type": "maintenance",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": ["food-security", "open-data", "data-governance", "devops"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Freshness is only maintained if re-verification is continuous and systematic. The SLA-driven staleness sweep (implemented in food-maps-fresh-009) must be scheduled and owned. The cadence must distinguish volatile fields (hours, eligibility, operating status — re-verified at ≤90-day intervals) from stable fields (name, location — longer cadence), and published scope must be capped to what the team/partner can keep fresh. This task formalizes the cadence and automates the sweep. Depends on food-maps-fresh-009 and food-maps-audit-015.",
+  "objective": "Document the re-verification cadence for the project and automate the SLA-driven staleness sweep: (1) a cadence document specifying re-verification intervals per field type (volatile: hours/eligibility/status at ≤90 days; stable: name/location at longer intervals) and per source reliability; (2) a scheduled staleness sweep (GitHub Actions cron or equivalent) that flags overdue entries and opens issues or generates a re-verification work list for human reviewers; (3) a scope-capping rule that limits published coverage to what the team/partner can actively re-verify; and (4) a handoff document for steward ownership.",
+  "acceptanceCriteria": [
+    "Cadence document specifies re-verification intervals: volatile fields (hours, eligibility, operating status) at ≤90 days; stable fields (name, location) at a longer configurable interval",
+    "Cadence is configurable per source reliability (more-reliable sources may have longer intervals)",
+    "Automated staleness sweep runs on a schedule (e.g. GitHub Actions cron, weekly or daily) and produces a report of entries approaching or past their reverify_due date",
+    "The sweep output (list of overdue entries) is surfaced to human reviewers via a GitHub Issue, a generated report, or a pull-request-ready work list — not auto-corrected by the pipeline",
+    "Scope-capping rule is documented: published coverage grows only as fast as re-verification capacity; regions/entries that can no longer be freshened within SLA are demoted rather than left stale",
+    "Steward ownership and handoff documented: who runs the cadence, how to onboard a new steward, what to do if re-verification capacity drops",
+    "Integration with food-maps-audit-015 (quarterly audit) and food-maps-fresh-009 (staleness machine) is documented"
+  ],
+  "resources": [
+    "tasks/food-maps-fresh-009.json",
+    "tasks/food-maps-audit-015.json",
+    "tasks/food-maps-partner-016.json"
+  ],
+  "output": "docs/reverification-cadence.md (cadence document + scope-capping rule + steward handoff) + .github/workflows/staleness-sweep.yml (scheduled staleness sweep automation).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

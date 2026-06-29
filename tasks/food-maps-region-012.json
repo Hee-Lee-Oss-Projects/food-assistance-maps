@@ -1,0 +1,39 @@
+{
+  "id": "food-maps-region-012",
+  "title": "Fully cover and verify one region; reach ≥95% audit accuracy",
+  "project": "food-assistance-maps",
+  "type": "data",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "data-engineering", "civic-tech"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "dataset",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "The M2 milestone requires at least one region to be fully covered and audited at ≥95% accuracy and ≥90% freshness — the metrics that determine whether the directory is safe to rely on for referrals. Expanding from the M0 pilot (~25–50 entries) to full regional coverage requires the complete ingestion, geocoding, deduplication, and verification pipeline from M1 to be operational. Depends on food-maps-geocode-008, food-maps-fresh-009, and food-maps-verify-010.",
+  "objective": "Using the M1 pipeline (adapters, geocoder, dedup, staleness machine, verification-log gate), ingest, verify, and publish a complete food-assistance directory for one defined region (city/county or metropolitan area). Every published entry must clear the verification + freshness + license + PII gates. Conduct or commission a random-sample re-verification audit of the published entries and demonstrate ≥95% accuracy (existence, location, hours, eligibility) and ≥90% freshness within SLA.",
+  "acceptanceCriteria": [
+    "One region is defined (city, county, or metropolitan area) with a coverage boundary documented",
+    "All food-assistance service types in scope (food banks, pantries, community fridges, soup kitchens, meal programs) within the region are ingested from cleared sources",
+    "Every published entry clears the verification policy (one authoritative source or ≥2 independent signals) with last_verified within the freshness SLA",
+    "Every published entry has a correct per-record data_license; no ODbL-derived entry is relabeled CC-BY",
+    "Every published entry has pii_review recorded; operator-PII minimized where applicable",
+    "A random-sample re-verification audit (≥10% of entries, conducted by a reviewer independent of the ingester) measures accuracy on: existence (site is open), location (correct address), hours (correct current hours), and eligibility (correct eligibility criteria)",
+    "Audit result shows ≥95% accuracy across audited entries",
+    "Freshness report shows ≥90% of regional entries within the freshness SLA at the time of publication",
+    "Closed/moved sites are recorded with correct operating_status and not published as active",
+    "A PR-tied verification-log entry covers the full regional dataset"
+  ],
+  "resources": [
+    "tasks/food-maps-geocode-008.json",
+    "tasks/food-maps-fresh-009.json",
+    "tasks/food-maps-verify-010.json",
+    "tasks/food-maps-privacy-011.json",
+    "https://docs.openreferral.org/"
+  ],
+  "output": "data/<region>/ (complete regional dataset in HSDS-conformant JSON) + docs/verification-log.md (regional audit entry) + docs/audit-report-<region>.md (random-sample accuracy audit results).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "ODbL-1.0"
+}

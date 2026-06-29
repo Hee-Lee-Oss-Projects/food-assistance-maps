@@ -1,0 +1,37 @@
+{
+  "id": "food-maps-ingest-007",
+  "title": "Ingestion adapters for ≥3 source types (gov open data, OSM, HSDS feed), source-neutral core",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "data-engineering", "civic-tech"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "The ingestion layer must be extensible and license-clean. Per Elyos architecture rules, all source-specific logic lives in isolated adapters; the core HSDS model stays source-neutral. Each adapter must record sources[] with the correct license and shareAlike flag, store only structured facts (no verbatim copyrighted prose), and respect each source's terms/robots.txt. Depends on food-maps-schema-001 (the schema to normalize into) and food-maps-registry-003 (the cleared source list).",
+  "objective": "Implement ingestion adapters for ≥3 source types — (1) government open-data portal (JSON/CSV download or API), (2) OpenStreetMap (Overpass API or pbf extract), and (3) an Open Referral HSDS feed — each as an isolated TypeScript/ESM module in adapters/. Each adapter normalizes its source to the HSDS + provenance/freshness model, populates sources[] with the correct license fields, stores structured facts only, and produces staging entries for the pipeline core.",
+  "acceptanceCriteria": [
+    "≥3 adapters implemented as isolated TypeScript/ESM modules under adapters/: one for a government open-data source, one for OSM (via Overpass API or pbf), one for an HSDS feed",
+    "All source-specific parsing logic lives in adapters/; packages/core and the HSDS model contain no source-specific code (Elyos architecture rule)",
+    "Each adapter populates sources[] with name, URL, license, retrievedDate, attribution string, and shareAlike flag for every entry it produces",
+    "No adapter stores verbatim copyrighted descriptions — only structured facts (name, address, hours, eligibility statements, contact)",
+    "The OSM adapter records ODbL license and shareAlike: true on all derived entries",
+    "Each adapter respects the source's terms and robots.txt; adapters for sources that forbid automated access are blocked at the registry gate",
+    "Unit tests for each adapter cover: a valid source record produces a valid staging entry; license fields are populated; PII-shaped fields are absent",
+    "Adapters pass lint, typecheck, and CI"
+  ],
+  "resources": [
+    "tasks/food-maps-schema-001.json",
+    "tasks/food-maps-registry-003.json",
+    "https://docs.openreferral.org/",
+    "https://wiki.openstreetmap.org/wiki/Overpass_API",
+    "https://opendatacommons.org/licenses/odbl/"
+  ],
+  "output": "adapters/ directory with ≥3 adapter modules (gov-opendata.ts, osm.ts, hsds-feed.ts) and corresponding unit tests, integrated into the pipeline core.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

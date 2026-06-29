@@ -1,0 +1,38 @@
+{
+  "id": "food-maps-geocode-008",
+  "title": "Open-geocoder integration + dedup/reconciliation with precedence + confidence flagging",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "data-engineering", "geospatial"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "Geocoding errors can place a food-assistance entry at the wrong location, sending a food-insecure person to the wrong address — real harm. Only open geocoders whose terms permit storing results are permitted (OSM/Nominatim, Pelias, US Census Geocoder). Low-confidence geocodes must be flagged for human review rather than published silently. Deduplication must preserve the full source trail so closures and corrections are never lost. Depends on food-maps-ingest-007 (adapters producing staging entries).",
+  "objective": "Implement the geocoding and deduplication stages of the pipeline: (1) a geocoding module that resolves addresses using an open geocoder (Nominatim, Pelias, or US Census Geocoder), records geocode_source, confidence level, and the resolved coordinates per entry, and flags low-confidence results for human review rather than publishing them; (2) a deduplication/reconciliation module that clusters likely-duplicate entries across sources, merges them using a precedence rule (authoritative/operator source wins), and preserves the full source trail in sources[].",
+  "acceptanceCriteria": [
+    "Geocoding uses only open geocoders whose terms permit storing results (Nominatim, Pelias, or US Census Geocoder); no proprietary geocoder whose terms forbid stored results",
+    "Each geocoded entry records geocode_source (which geocoder) and a confidence level (high/medium/low)",
+    "Low-confidence geocodes are flagged in the entry's metadata and excluded from the authoritative published set until a human confirms them",
+    "Entries with a geocoding mismatch vs. the source address are flagged for review",
+    "Deduplication clusters entries that represent the same physical location/service across sources using deterministic matching (address normalization + name similarity or spatial proximity)",
+    "Merged entries preserve the full sources[] trail from all contributing source records (no provenance is dropped on merge)",
+    "Precedence rule is documented and applied: authoritative/operator-published source wins over aggregated sources for conflicting facts",
+    "Closure signals from any source demote the merged entry's operating_status and are never lost on merge",
+    "Unit tests cover: a high-confidence geocode passes; a low-confidence geocode is flagged; two records for the same location from different sources merge with both sources preserved; a closure from one source propagates to the merged entry"
+  ],
+  "resources": [
+    "tasks/food-maps-ingest-007.json",
+    "tasks/food-maps-schema-001.json",
+    "https://nominatim.openstreetmap.org/ui/about.html",
+    "https://geocoding.geo.census.gov/",
+    "https://github.com/pelias/pelias"
+  ],
+  "output": "src/pipeline/geocode.ts + src/pipeline/dedup.ts with unit tests, integrated into the pipeline core and passing CI.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

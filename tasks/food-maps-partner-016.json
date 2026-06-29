@@ -1,0 +1,36 @@
+{
+  "id": "food-maps-partner-016",
+  "title": "Secure named partner (food-bank network / 211 / mutual aid); confirm region + last-mile verification",
+  "project": "food-assistance-maps",
+  "type": "research",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "civic-tech", "partnerships", "data-governance"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The project's Definition of Shipped (partner-adopted) requires a named partner org — a food-bank network, 211/AIRS center, community-action agency, or mutual-aid org — that confirms the need in writing and commits to the last-mile human verification that AI cannot do. Until a partner is secured, verifiedNeed = false and the project is 'publicly usable' but not 'shipped' by Elyos's delivered-not-merged bar. A 6-month post-M3 decision point exists: if no partner is secured by then, governance may declare 'Publicly Shipped (generic public good)' instead.",
+  "objective": "Identify, contact, and secure commitment from ≥1 named partner organization (food-bank network, 211/AIRS center, community-action agency, or mutual-aid org) that: (1) confirms the need in writing (letter of support or lightweight MOU); (2) names a priority region for the dataset; (3) ideally commits to assist with last-mile human verification (phone/visit confirmation); and (4) agrees to the data-sharing/attribution terms. Document the engagement and record the signed commitment in the project's governance files.",
+  "acceptanceCriteria": [
+    "≥1 named partner organization identified and contacted with a clear description of the project, its outputs, and the ask",
+    "The partner confirms the need in writing — either a letter of support or a lightweight MOU is signed and filed in the repo's governance directory",
+    "The partner names a priority region (city, county, or metropolitan area) to guide regional coverage",
+    "The commitment document is filed in docs/partnerships/ with the partner name, organization type, date, region, and scope of commitment",
+    "The steward updates verifiedNeed to true and requestor to the named org across all task files upon confirmation",
+    "If the partner commits to last-mile human verification, a verification rota or point of contact is documented",
+    "The engagement process (outreach approach, talking points, what was shared) is documented so future partners can be recruited using the same approach",
+    "If no partner is secured within the 6-month post-M3 window, the steward triggers the 'Publicly Shipped (generic public good)' governance review"
+  ],
+  "resources": [
+    "PLAN.md",
+    "https://www.feedingamerica.org/",
+    "https://www.211.org/",
+    "https://www.openreferral.org/"
+  ],
+  "output": "docs/partnerships/<partner-name>-commitment.md (signed letter/MOU and engagement notes) + a governance update setting verifiedNeed and requestor.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}
