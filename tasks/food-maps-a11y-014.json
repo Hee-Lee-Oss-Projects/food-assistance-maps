@@ -1,0 +1,38 @@
+{
+  "id": "food-maps-a11y-014",
+  "title": "Directory/map view to WCAG 2.2 AA with automated + manual AT audit and search/filter",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "accessibility", "civic-tech", "open-data"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "large",
+  "status": "open",
+  "context": "The directory view serves food-insecure people who may rely on assistive technology, keyboard navigation, or have limited digital access. WCAG 2.2 AA is the accessibility floor; a manual AT audit across the documented support matrix (NVDA+Firefox/Win, JAWS+Chrome/Win, VoiceOver+Safari/macOS·iOS, TalkBack+Chrome/Android, keyboard-only) is required in addition to automated checks. Search and filter are essential usability features: a person searching by location, service type, hours, language, or accessibility needs must be able to do so without assistance. Depends on food-maps-view-006 (the base view) and food-maps-export-013 (the open exports).",
+  "objective": "Extend the minimal directory view to full WCAG 2.2 AA conformance with automated and manual AT audit sign-off, and implement search/filter functionality. The view must: (1) pass automated axe/pa11y with 0 critical violations; (2) pass a documented manual AT audit across the support matrix; (3) include search/filter by location (postcode/address), service type, operating hours, language served, and accessibility features; (4) make the map keyboard-operable with a non-map fallback list; and (5) surface last_verified and a 'call ahead' caveat on every entry.",
+  "acceptanceCriteria": [
+    "Automated axe/pa11y scan produces 0 critical WCAG 2.2 AA violations on all pages/views",
+    "Manual AT audit completed across: NVDA+Firefox/Win, JAWS+Chrome/Win, VoiceOver+Safari/macOS, VoiceOver+Safari/iOS, TalkBack+Chrome/Android, and keyboard-only (per desktop browser); findings documented and resolved",
+    "Manual AT audit signed off by the designated accessibility reviewer",
+    "Search/filter implemented for: location (address/postcode proximity), service type (food bank/pantry/fridge/meal program), operating hours (open now / open on day), language served, and accessibility features (wheelchair access, etc.)",
+    "Map is keyboard-operable: all map pins reachable via keyboard; focus management is correct; a non-map fallback list contains all entries and is usable without the map",
+    "Every entry in the list/map displays last_verified date and a 'call ahead / verify before visiting' caveat",
+    "Text alternatives, labels, and error messages meet WCAG 2.2 AA for all interactive controls",
+    "Color contrast meets WCAG 2.2 AA (≥4.5:1 for normal text, ≥3:1 for large text and UI components)",
+    "Accessibility conformance is maintained in CI (axe/pa11y gate runs on every PR)"
+  ],
+  "resources": [
+    "tasks/food-maps-view-006.json",
+    "tasks/food-maps-export-013.json",
+    "https://www.w3.org/WAI/WCAG22/quickref/",
+    "https://github.com/nicedoc/axe-core",
+    "https://pa11y.org/"
+  ],
+  "output": "Updated src/view/ with search/filter and full WCAG 2.2 AA compliance + docs/accessibility-audit.md (signed AT audit report).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

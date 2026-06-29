@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-privacy-011",
+  "title": "Operator-PII review workflow (opt-out / approximate-area; pii_review recorded)",
+  "project": "food-assistance-maps",
+  "type": "design-spec",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": ["food-security", "privacy", "data-governance", "open-data"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "Many small food pantries and community fridges are operated by individuals from their home addresses or personal phones. Publishing this information exposes private individuals' PII. The project must have a documented, reviewable process for identifying and minimizing operator PII before any entry is published. The pii_review field in the schema is the auditable record of this decision. Recipient/client PII is impossible by schema construction; this task covers the harder operator-PII edge case. Depends on food-maps-schema-001 for the pii_review field definition.",
+  "objective": "Produce a documented operator-PII review workflow and decision tree that: (1) defines criteria for identifying plausibly-private individual addresses/phones (vs. public organizational contacts); (2) specifies the preferred handling — use the operator's published public channel; (3) defines the opt-out / approximate-area path (show approximate area + public contact instead of exact address/personal phone) for cases where a private individual's details are implicated; (4) specifies how pii_review is recorded (clear or operator-pii-minimized) and who reviews it; and (5) integrates the PII-review step into the verification workflow so it is required before any entry is published.",
+  "acceptanceCriteria": [
+    "Decision tree or checklist covers: how to identify plausibly-private home addresses and personal phones in food-assistance listings",
+    "Preferred handling documented: prefer the operator's published public org channel (website contact form, public phone number, public address) over any personal/home details",
+    "Opt-out / approximate-area path defined: if a private individual's address/phone is the only available contact, show approximate area (e.g. neighborhood or zip) plus a public contact channel, not the exact personal details",
+    "pii_review field usage documented: 'clear' when no operator PII is exposed; 'operator-pii-minimized' when the opt-out/approximate-area path was applied",
+    "PII-review step is required before any entry is published (integrated into the verification checklist in docs/verification-log.md format)",
+    "The workflow notes that recipient/client PII is impossible by schema construction (no client fields exist) — operator PII is the only PII risk in this project",
+    "No recipient/client data path exists in any described workflow",
+    "Document reviewed and signed off by the privacy reviewer (distinct from the author)"
+  ],
+  "resources": [
+    "tasks/food-maps-schema-001.json",
+    "tasks/food-maps-arch-002.json"
+  ],
+  "output": "docs/operator-pii-workflow.md (decision tree + policy document) and an update to the verification checklist template in docs/verification-log.md to include the pii_review step.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-hsda-022",
+  "title": "Optional read-only HSDA-style API endpoint over the published dataset",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "low",
+  "domain": ["food-security", "open-data", "data-engineering", "civic-tech"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The default distribution is static HSDS JSON/CSV/GeoJSON files (a read-only static API). If a downstream reuser (211/AIRS system, civic app, community map) needs a live queryable endpoint, an optional HSDA-style read-only API can be added as a thin layer over the published dataset. This is backlog — activate only if a reuser specifically needs it and the static exports are insufficient. The API must be read-only, serve no recipient data, and add no telemetry.",
+  "objective": "Implement an optional, read-only HSDA-compatible API endpoint over the published food-assistance-maps dataset. The API must: (1) serve only the published (verified, freshness-gated) entries; (2) support basic HSDA query parameters (location, service_type, status); (3) be read-only with no write endpoints; (4) add no telemetry or tracker; (5) include correct CORS headers for cross-origin civic-tech use; and (6) be deployable as a serverless function or edge worker over the static dataset.",
+  "acceptanceCriteria": [
+    "API exposes read-only HSDA-compatible endpoints for listing and filtering services (by location, service_type, operating_status)",
+    "No write, update, or delete endpoints exist",
+    "API serves only published (verified, freshness-gated) entries — the same set as the static exports",
+    "No recipient/client data fields are returned by any endpoint",
+    "No telemetry or tracker is introduced by the API layer",
+    "CORS headers are set correctly to allow cross-origin requests from civic-tech consumers",
+    "API is documented (OpenAPI spec or equivalent) with field descriptions and example responses",
+    "API activation is gated on a confirmed downstream reuser who needs it (static exports were insufficient for their use case)"
+  ],
+  "resources": [
+    "tasks/food-maps-export-013.json",
+    "https://docs.openreferral.org/en/latest/hsda/"
+  ],
+  "output": "src/api/ (HSDA-style API implementation) + docs/api.md (API documentation / OpenAPI spec), deployable as a serverless function.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

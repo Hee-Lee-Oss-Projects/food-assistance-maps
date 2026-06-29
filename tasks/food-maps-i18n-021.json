@@ -1,0 +1,35 @@
+{
+  "id": "food-maps-i18n-021",
+  "title": "Localize the directory view and key data fields into priority community languages",
+  "project": "food-assistance-maps",
+  "type": "writing",
+  "lane": "donated",
+  "priority": "low",
+  "domain": ["food-security", "accessibility", "civic-tech", "open-data"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "translation",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Many food-insecure people have limited English proficiency. Localizing the directory view and key data fields (service name, eligibility summary, hours, caveat messages) into priority community languages — determined by the named partner based on the region's demographics — makes the directory accessible to more people who need it. Translation accuracy is a safety property: a mis-translated hours or eligibility statement could send someone to a site they cannot use. Partner-driven language priority and a native-speaker accuracy review are required before any translation is published.",
+  "objective": "Localize the directory view UI strings and key HSDS data fields (service type labels, eligibility summaries, hours format, accessibility labels, and the 'call ahead / verify before visiting' caveat) into the community languages identified as priority by the named partner. Each translation must be reviewed for accuracy by a native speaker before publication; the translation workflow, reviewer attribution, and review sign-off are recorded in the verification log.",
+  "acceptanceCriteria": [
+    "Priority languages are identified by the named partner based on the region's demographic needs (partner input required before task starts)",
+    "All UI strings in the directory view are externalized into a translation-ready resource file (e.g. JSON or PO format) before translation begins",
+    "Key data fields localized: service type labels, eligibility summary text, schedule/hours display, accessibility feature labels, operating_status labels, and the 'call ahead / verify before visiting' caveat",
+    "Each translation is reviewed for accuracy and natural language by a native speaker of the target language who is not the translator (no self-approval)",
+    "Translation accuracy review specifically checks: hours/schedule terms, eligibility and restriction phrases, and the safety caveat — these must be accurate, not just fluent",
+    "Reviewer attribution and sign-off are recorded in the verification log alongside the PR",
+    "Language switcher or locale selection is accessible (WCAG 2.2 AA) in the directory view",
+    "CI includes a check that no translation file is missing required keys from the base English resource"
+  ],
+  "resources": [
+    "tasks/food-maps-partner-016.json",
+    "tasks/food-maps-a11y-014.json",
+    "https://www.w3.org/WAI/WCAG22/quickref/"
+  ],
+  "output": "src/view/locales/<lang>.json (translation files) for each priority language + docs/translation-log.md (reviewer attribution and sign-off per language).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

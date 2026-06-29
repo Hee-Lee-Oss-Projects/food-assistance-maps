@@ -1,0 +1,36 @@
+{
+  "id": "food-maps-deploy-018",
+  "title": "Production deployment + versioned exports + disclaimer/attribution/branding",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": ["food-security", "open-data", "devops", "civic-tech"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The M3 production deployment makes the directory and its open exports publicly available over HTTPS. Key requirements: a visible disclaimer that the dataset is community-maintained and not an official agency product unless a named partner endorses it; 'last verified / call ahead' framing on every entry; versioned export bundles for downstream reusers; correct attribution including OSM. Depends on food-maps-a11y-014 (accessible view) and food-maps-export-013 (open exports).",
+  "objective": "Deploy the food-assistance-maps directory view and open export bundles to a static production hosting environment (HTTPS). The deployment must include: (1) a visible disclaimer on the site and in export bundles stating the dataset is community-maintained and not an official agency product; (2) 'last verified / call ahead' framing on every entry in the view; (3) versioned export bundles (semantic versioning, checksummed) accessible at stable URLs; (4) correct attribution/credits page (OSM, all sources, map-tile provider); and (5) a documented deployment and release process.",
+  "acceptanceCriteria": [
+    "Directory view is deployed to a static hosting environment over HTTPS (e.g. GitHub Pages, Netlify, Cloudflare Pages)",
+    "Visible disclaimer present on every page: the dataset is community-maintained and is not an official agency product unless a named partner has endorsed it",
+    "Every entry in the view displays last_verified and a 'call ahead / verify before visiting' caveat",
+    "Export bundles are versioned with semantic versioning, named with version tags (e.g. v1.0.0), and available at stable URLs",
+    "Export bundles include checksums (SHA-256) for integrity verification",
+    "A credits/attribution page or section lists all data sources with correct attribution strings, including '© OpenStreetMap contributors, ODbL' if OSM data is included",
+    "Deployment process is documented: how to cut a release, update exports, and push to production",
+    "The site's TLS certificate is valid and the deployment passes a basic security check (no mixed content, CSP headers present)",
+    "CI/CD pipeline produces production builds and deployment artifacts on tagged releases"
+  ],
+  "resources": [
+    "tasks/food-maps-a11y-014.json",
+    "tasks/food-maps-export-013.json",
+    "tasks/food-maps-arch-002.json"
+  ],
+  "output": "Deployed production site at a stable HTTPS URL + CI/CD release pipeline producing versioned, checksummed export bundles + docs/deployment.md (release process documentation).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

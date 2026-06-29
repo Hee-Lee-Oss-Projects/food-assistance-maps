@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-outcomes-017",
+  "title": "Outcomes-tracking process (partner self-report; no client telemetry) + reuser register",
+  "project": "food-assistance-maps",
+  "type": "maintenance",
+  "lane": "donated",
+  "priority": "low",
+  "domain": ["food-security", "data-governance", "partnerships", "privacy"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "food-assistance-maps collects no recipient telemetry — reach is measured exclusively through partner self-report and downstream-reuser reports. This is an explicit privacy/measurement trade-off: the dataset serves vulnerable people who must not be tracked. The outcomes-tracking process must be privacy-preserving by design, with a standard reporting template that partners can fill in without collecting or sharing any client PII. Depends on food-maps-partner-016 (a named partner who can report).",
+  "objective": "Design and document a privacy-preserving outcomes-tracking process using partner self-report: (1) a standard reporting template (partner, period, channels, confirmed successful referrals/look-ups, flagged estimates, regions/languages, de-dup notes) over a rolling 12-month window; (2) a counting rule (distinct people per reporting period, de-duplicated across partners at roll-up); (3) a reuser register tracking downstream integrations; and (4) a process for collecting and aggregating reports without any client PII.",
+  "acceptanceCriteria": [
+    "Standard partner self-report template defined with fields: partner name, reporting period, channels used, confirmed successful referrals/look-ups (count), estimated reach (labeled as estimate), regions covered, languages served, de-duplication notes",
+    "Template explicitly states: no client PII collected — counts only, no names, IDs, addresses, or demographics",
+    "Counting rule documented: each partner counts a person once per reporting period across their touchpoints; de-duplication across partners is best-effort at roll-up, partner-attested",
+    "Rolling 12-month window defined; aggregated counts are recorded separately from estimates",
+    "Reuser register template defined: reuser name/org, type of integration (211 import, community map, app, etc.), region, date of integration, contact",
+    "Process for collecting reports documented (cadence, submission method, aggregation and publication)",
+    "Process reviewed by the steward and at least one partner representative before finalization",
+    "The template and process are published in the repo so any partner or downstream reuser can use them"
+  ],
+  "resources": [
+    "tasks/food-maps-partner-016.json",
+    "PLAN.md"
+  ],
+  "output": "docs/outcomes-tracking.md (process document + partner report template + reuser register template).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-fresh-009",
+  "title": "Staleness state machine (flag/demote/withhold) + closure handling + freshness report",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "data-engineering", "data-governance"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "Freshness is a safety property for food-assistance-maps: a stale entry can send a food-insecure person to a closed or moved site. The staleness state machine enforces the freshness SLA recorded in the ADRs (ADR in food-maps-arch-002): volatile fields are re-verified at least every 90 days; entries are flagged stale at 120 days and demoted/withheld from the authoritative set at 180 days. Closure is first-class — a contradicted entry is never silently kept. The freshness report gives the CI gate its pass/fail signal. Depends on food-maps-schema-001.",
+  "objective": "Implement the staleness state machine and closure-handling logic: (1) a scheduled/on-demand staleness sweep that transitions entries through states (within-SLA → flagged → demoted/withheld) based on last_verified and the configurable SLA windows; (2) first-class closure handling that surfaces closed/temporarily_closed/moved operating_status and never silently drops or retains a contradicted entry; (3) a freshness report (per-region breakdown: count within SLA, flagged, demoted, withheld) that CI uses as a gate (builds fail if demoted/withheld entries exist in the authoritative dataset). The view must surface last_verified and a 'call ahead' caveat on every entry.",
+  "acceptanceCriteria": [
+    "Staleness sweep transitions entries: within-SLA → flagged (at configurable flag window, default 120 days) → demoted/withheld (at configurable demote window, default 180 days)",
+    "SLA windows are configurable per source type (volatile fields vs. stable fields) via the ADR-defined defaults",
+    "A contradicted entry (closure signal from any source) is immediately demoted to operating_status: temporarily_closed/moved/closed and surfaced as such — never silently kept as 'open'",
+    "The freshness report outputs per-region counts: within_sla, flagged, demoted, withheld",
+    "CI build fails if any entry in the authoritative (published) dataset has operating_status = withheld or is past the demote window",
+    "The directory view surfaces last_verified and a 'call ahead / verify before visiting' caveat on every entry regardless of freshness state",
+    "Unit tests cover: an entry within SLA stays published; an entry past the flag window is flagged; an entry past the demote window is withheld from the authoritative set; a contradicted entry is demoted",
+    "Freshness report shows ≥90% of pilot-region entries within SLA after the pilot dataset is ingested"
+  ],
+  "resources": [
+    "tasks/food-maps-schema-001.json",
+    "tasks/food-maps-arch-002.json"
+  ],
+  "output": "src/pipeline/freshness.ts (state machine + staleness sweep) + src/pipeline/report.ts (freshness report) with unit tests, integrated into CI.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

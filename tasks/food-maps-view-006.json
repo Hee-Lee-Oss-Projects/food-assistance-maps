@@ -1,0 +1,37 @@
+{
+  "id": "food-maps-view-006",
+  "title": "Minimal accessible directory view rendering the pilot from published exports",
+  "project": "food-assistance-maps",
+  "type": "code",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": ["food-security", "accessibility", "civic-tech", "open-data"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "pr",
+  "tokenEstimate": "medium",
+  "status": "open",
+  "context": "The directory/map view is a thin reference consumer of the published HSDS/GeoJSON exports. It is deliberately minimal at M0 — just enough to render the pilot entries so that a food-insecure person can browse them. It must be statically hosted, accessible (targeting WCAG 2.2 AA), and include no third-party trackers. Every entry must surface the last_verified date and a 'call ahead' caveat so users are never over-reliant on possibly-stale data. Depends on food-maps-pilot-004 (pilot dataset) and food-maps-ci-005 (CI gates).",
+  "objective": "Build a minimal static directory view (chosen technology per ADR in food-maps-arch-002) that reads the published GeoJSON/HSDS exports and renders the pilot entries as a browsable list (and optionally a map). The view must: show name, address, hours, service type, eligibility summary, languages served, accessibility info, and last_verified + 'call ahead / verify before visiting' caveat for every entry; be deployable as a static site; include no telemetry or third-party trackers; and pass automated axe/pa11y checks at WCAG 2.2 AA.",
+  "acceptanceCriteria": [
+    "View renders all pilot entries from the published HSDS/GeoJSON export without fetching data at runtime (static build)",
+    "Every entry displays: name, address, hours, service type, eligibility summary, languages served, accessibility info, last_verified date, and operating_status (with 'call ahead' caveat where not 'open')",
+    "No third-party tracker scripts, analytics, or ad-network resources are loaded (enforced by CSP and verified by the CI no-tracker E2E)",
+    "Automated axe/pa11y scan produces 0 critical WCAG 2.2 AA violations",
+    "Site is keyboard-navigable (all interactive elements reachable and operable via keyboard)",
+    "Static build can be deployed to a standard static hosting service (e.g., GitHub Pages, Netlify, Cloudflare Pages)",
+    "Credits/sources page lists all data sources with correct attribution (including OSM '© OpenStreetMap contributors, ODbL' if OSM data is present)",
+    "All pilot entries are visible and the view degrades gracefully if the export is empty"
+  ],
+  "resources": [
+    "tasks/food-maps-pilot-004.json",
+    "tasks/food-maps-ci-005.json",
+    "tasks/food-maps-arch-002.json",
+    "https://www.w3.org/WAI/WCAG22/quickref/",
+    "https://github.com/nicedoc/axe-core"
+  ],
+  "output": "src/view/ (static front-end source) + built output in dist/ that passes CI (axe, no-tracker E2E, CSP).",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "MIT"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-audit-015",
+  "title": "Quarterly random-sample re-verification audit process and tooling",
+  "project": "food-assistance-maps",
+  "type": "maintenance",
+  "lane": "donated",
+  "priority": "medium",
+  "domain": ["food-security", "open-data", "data-governance", "data-engineering"],
+  "riskTier": "medium",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "The ≥95% accuracy target is measured by a quarterly random-sample re-verification audit — an independent check that published entries are real, open, and correct. The audit is independent of the ingesting contributor (no self-verification), uses the same verification policy as the pipeline (authoritative source or ≥2 signals), and feeds corrections back into the dataset. This process is the long-term accuracy guarantee for a directory that food-insecure people rely on. Depends on food-maps-verify-010 (the verification-log gate).",
+  "objective": "Design and document the quarterly random-sample re-verification audit process and provide a CLI tool or script to support it. The process must: (1) randomly select ≥10% of published entries per region per quarter; (2) produce a structured audit worksheet for each sampled entry (current facts vs. re-verified facts); (3) record the audit result (accurate/inaccurate + the discrepancy); (4) feed corrections back through the standard verification pipeline (not bypassing the verification gate); (5) report overall accuracy rate vs. the ≥95% target; and (6) be conducted by a reviewer independent of the ingesting contributor.",
+  "acceptanceCriteria": [
+    "Audit process document defines the sampling method (random ≥10% of published entries per region per quarter, stratified by service type if feasible)",
+    "Audit worksheet template covers: entry ID, current facts (existence, location, hours, eligibility), re-verified facts, verification method used, discrepancy description, correction action",
+    "A CLI script or tool generates a randomized audit sample from the published dataset and outputs structured worksheets",
+    "Audit results are recorded in a machine-readable format (JSON or CSV) per quarter per region",
+    "Corrections from the audit feed back through the standard verification pipeline (not a bypass — corrections require a PR with provenance and verification-log entry)",
+    "Audit accuracy report calculates the percentage of audited entries that are accurate across: existence, location, hours, and eligibility",
+    "Process documentation specifies that the auditor must be independent from the contributor who ingested/verified the audited entries",
+    "Quarterly cadence is defined with an initial run scheduled for ≤90 days after the first region is fully published"
+  ],
+  "resources": [
+    "tasks/food-maps-verify-010.json",
+    "tasks/food-maps-region-012.json"
+  ],
+  "output": "docs/audit-process.md (audit process and worksheet template) + scripts/audit-sample.ts (CLI tool for generating audit samples) + an initial audit report template.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}
