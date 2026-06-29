@@ -1,0 +1,34 @@
+{
+  "id": "food-maps-arch-002",
+  "title": "ADRs: adopt HSDS, resolve data-license/ODbL share-alike, freshness SLA, verification policy, geocoder, UI/hosting",
+  "project": "food-assistance-maps",
+  "type": "design-spec",
+  "lane": "donated",
+  "priority": "high",
+  "domain": ["food-security", "open-data", "civic-tech", "licensing"],
+  "riskTier": "low",
+  "urgent": false,
+  "deliverable": "document",
+  "tokenEstimate": "small",
+  "status": "open",
+  "context": "food-assistance-maps publishes an open, freshness-tracked directory of food banks, pantries, community fridges, and meal programs by region. Before any data is ingested, the project must lock its foundational decisions: the canonical schema, the data-license resolution (OpenStreetMap is ODbL share-alike, so a blanket CC-BY claim would violate its terms), the freshness SLA and staleness behavior, the verification policy, and the open-geocoder/UI choices. These ADRs gate the schema and all ingestion.",
+  "objective": "Produce Architecture Decision Records that (1) adopt Open Referral HSDS as the canonical schema plus an Elyos provenance/freshness extension, (2) resolve the ODbL share-alike vs. CC-BY question with a conservative default and a per-record data_license rule, (3) define the freshness SLA windows + staleness state machine + closure handling, (4) define the verification policy (one authoritative source OR >=2 independent signals; human-required confirmation methods), and (5) choose an open-only geocoder, map tiles, UI framework, and static hosting.",
+  "acceptanceCriteria": [
+    "ADR #1 adopts HSDS as canonical and specifies the provenance/freshness extension fields",
+    "ADR #2 resolves data licensing (ODbL-only / CC-BY-without-OSM / dual-track) with a conservative default and a rule for setting data_license per record and declaring effective license + attribution in exports",
+    "Freshness SLA windows (volatile vs. stable fields), the flag/demote/withhold staleness state machine, and first-class closure handling are recorded",
+    "Verification policy is defined: authoritative-source vs. >=2-signal threshold, and which methods require a human (AI may not self-certify phone/operator/partner confirmation)",
+    "Open-only geocoder + map-tile provider (terms permit storing results), UI framework, and static hosting are chosen and justified",
+    "ADR #1 and ADR #2 are explicitly marked as prerequisites for schema finalization and ingestion"
+  ],
+  "resources": [
+    "C:\\code\\elyos\\planning\\projects\\food-assistance-maps\\PLAN.md",
+    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "https://docs.openreferral.org/",
+    "https://opendatacommons.org/licenses/odbl/"
+  ],
+  "output": "A document of Architecture Decision Records (HSDS adoption, data-license/ODbL resolution, freshness SLA + staleness machine, verification policy, geocoder/UI/hosting) that gate the schema and ingestion work.",
+  "requestor": "TBD",
+  "verifiedNeed": false,
+  "outputLicense": "CC-BY-4.0"
+}
