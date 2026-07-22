@@ -2,9 +2,9 @@
 
 > Status: Draft · Version: 0.1.0 · Last updated: 2026-06-28 · Owner: TBD (maintainer) · Lane: donated
 
-## How these tasks map to Elyos
+## How these tasks map to Hee-Lee Oss
 
-Each task below becomes an Elyos **Task JSON** validated against
+Each task below becomes a Hee-Lee Oss **Task JSON** validated against
 `packages/schema/src/schemas.ts`. Field mapping:
 
 - `id` — stable slug ID, e.g. `food-maps-schema-001`.
@@ -62,7 +62,7 @@ the schema is provisional and ingestion tasks are blocked.
 **Acceptance criteria — key tasks**
 
 - **food-maps-arch-002 (ADRs):**
-  - **ADR #1** adopts Open Referral **HSDS** as the canonical schema and defines the Elyos
+  - **ADR #1** adopts Open Referral **HSDS** as the canonical schema and defines the Hee-Lee Oss
     provenance/freshness extension shape.
   - **ADR #2 (decided before schema/ingestion)** resolves the **ODbL share-alike** question with one
     explicit option (ODbL-only / CC-BY-without-OSM / dual-track) and a conservative default; states how
@@ -124,7 +124,7 @@ minimal accessible view renders the pilot.
 
 - **food-maps-ingest-007 (adapters):**
   - One isolated adapter per source type; **all source-specific logic lives in the adapter**, the core
-    HSDS model stays source-neutral (per Elyos architecture rules).
+    HSDS model stays source-neutral (per Hee-Lee Oss architecture rules).
   - Each adapter records `sources[]` with license + `shareAlike`; stores **structured facts only** (no
     verbatim copyrighted prose); respects each source's terms/robots.
 - **food-maps-fresh-009 (staleness + closure):**
@@ -218,7 +218,7 @@ operational; production deployment with disclaimer/attribution; re-verification 
 sweep running. This satisfies the project-level *Definition of Shipped (partner-adopted)*.
 
 **Decision point (so a finished dataset isn't stranded):** if no partner is secured by **6 months
-after the M3 production build is ready**, the steward + Elyos governance may declare **"Publicly Shipped
+after the M3 production build is ready**, the steward + Hee-Lee Oss governance may declare **"Publicly Shipped
 (generic public good)"** — Definition-of-Shipped criteria (1)–(5) met, deployed and offered via
 mutual-aid/civic channels, accuracy/freshness maintained by best-effort community re-verification. A
 later partner endorsement upgrades the status rather than re-opening launch.
@@ -259,7 +259,7 @@ true first step (it gates the schema); shown here as the canonical example.
   "tokenEstimate": "small",
   "status": "open",
   "context": "food-assistance-maps publishes an open, freshness-tracked directory of food banks, pantries, community fridges, and meal programs by region. Before any data is ingested, the project must lock its foundational decisions: the canonical schema, the data-license resolution (OpenStreetMap is ODbL share-alike, so a blanket CC-BY claim would violate its terms), the freshness SLA and staleness behavior, the verification policy, and the open-geocoder/UI choices. These ADRs gate the schema and all ingestion.",
-  "objective": "Produce Architecture Decision Records that (1) adopt Open Referral HSDS as the canonical schema plus an Elyos provenance/freshness extension, (2) resolve the ODbL share-alike vs. CC-BY question with a conservative default and a per-record data_license rule, (3) define the freshness SLA windows + staleness state machine + closure handling, (4) define the verification policy (one authoritative source OR >=2 independent signals; human-required confirmation methods), and (5) choose an open-only geocoder, map tiles, UI framework, and static hosting.",
+  "objective": "Produce Architecture Decision Records that (1) adopt Open Referral HSDS as the canonical schema plus a Hee-Lee Oss provenance/freshness extension, (2) resolve the ODbL share-alike vs. CC-BY question with a conservative default and a per-record data_license rule, (3) define the freshness SLA windows + staleness state machine + closure handling, (4) define the verification policy (one authoritative source OR >=2 independent signals; human-required confirmation methods), and (5) choose an open-only geocoder, map tiles, UI framework, and static hosting.",
   "acceptanceCriteria": [
     "ADR #1 adopts HSDS as canonical and specifies the provenance/freshness extension fields",
     "ADR #2 resolves data licensing (ODbL-only / CC-BY-without-OSM / dual-track) with a conservative default and a rule for setting data_license per record and declaring effective license + attribution in exports",
@@ -269,8 +269,8 @@ true first step (it gates the schema); shown here as the canonical example.
     "ADR #1 and ADR #2 are explicitly marked as prerequisites for schema finalization and ingestion"
   ],
   "resources": [
-    "C:\\code\\elyos\\planning\\projects\\food-assistance-maps\\PLAN.md",
-    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "C:\\code\\hee-lee-oss\\planning\\projects\\food-assistance-maps\\PLAN.md",
+    "C:\\code\\hee-lee-oss\\packages\\schema\\src\\schemas.ts",
     "https://docs.openreferral.org/",
     "https://opendatacommons.org/licenses/odbl/"
   ],
@@ -285,9 +285,9 @@ true first step (it gates the schema); shown here as the canonical example.
 
 ## Generated task index
 
-> Auto-generated by the Elyos task-decomposition agent on 2026-06-29.
+> Auto-generated by the Hee-Lee Oss task-decomposition agent on 2026-06-29.
 > Every TASKS.md backlog row now has a corresponding `tasks/<id>.json` file validated against the
-> Elyos taskSchema (25 files total; 1 pre-existing seed kept as-is, 24 generated).
+> Hee-Lee Oss taskSchema (25 files total; 1 pre-existing seed kept as-is, 24 generated).
 
 | File | Title | Milestone | Type | Lane | Status |
 | --- | --- | --- | --- | --- | --- |

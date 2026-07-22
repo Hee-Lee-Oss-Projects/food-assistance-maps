@@ -275,7 +275,7 @@ extraction/flagging under human verification. Any large batch ingestion uses the
   leverage move: one open-source engine — HSDS schema + provenance/freshness/dedup/geocode pipeline
   + license register + accessible directory view — that **`community-resource-maps`** and
   **food-assistance-maps** both consume, each as a domain/taxonomy configuration. Resolves Open Q8
-  and the §1 dedup risk; every other Elyos directory (housing, health, legal-aid) reuses it.
+  and the §1 dedup risk; every other Hee-Lee Oss directory (housing, health, legal-aid) reuses it.
 - **`benefits-navigator` (perpendicular, high-risk sibling).** food-assistance-maps stays
   informational and **links out** to it for SNAP/WIC *eligibility advice + application help* — the
   clean risk-tier boundary. The directory feeds it "where to apply / where benefits are accepted."

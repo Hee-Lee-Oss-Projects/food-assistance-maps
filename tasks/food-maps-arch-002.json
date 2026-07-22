@@ -12,7 +12,7 @@
   "tokenEstimate": "small",
   "status": "open",
   "context": "food-assistance-maps publishes an open, freshness-tracked directory of food banks, pantries, community fridges, and meal programs by region. Before any data is ingested, the project must lock its foundational decisions: the canonical schema, the data-license resolution (OpenStreetMap is ODbL share-alike, so a blanket CC-BY claim would violate its terms), the freshness SLA and staleness behavior, the verification policy, and the open-geocoder/UI choices. These ADRs gate the schema and all ingestion.",
-  "objective": "Produce Architecture Decision Records that (1) adopt Open Referral HSDS as the canonical schema plus an Elyos provenance/freshness extension, (2) resolve the ODbL share-alike vs. CC-BY question with a conservative default and a per-record data_license rule, (3) define the freshness SLA windows + staleness state machine + closure handling, (4) define the verification policy (one authoritative source OR >=2 independent signals; human-required confirmation methods), and (5) choose an open-only geocoder, map tiles, UI framework, and static hosting.",
+  "objective": "Produce Architecture Decision Records that (1) adopt Open Referral HSDS as the canonical schema plus a Hee-Lee Oss provenance/freshness extension, (2) resolve the ODbL share-alike vs. CC-BY question with a conservative default and a per-record data_license rule, (3) define the freshness SLA windows + staleness state machine + closure handling, (4) define the verification policy (one authoritative source OR >=2 independent signals; human-required confirmation methods), and (5) choose an open-only geocoder, map tiles, UI framework, and static hosting.",
   "acceptanceCriteria": [
     "ADR #1 adopts HSDS as canonical and specifies the provenance/freshness extension fields",
     "ADR #2 resolves data licensing (ODbL-only / CC-BY-without-OSM / dual-track) with a conservative default and a rule for setting data_license per record and declaring effective license + attribution in exports",
@@ -22,8 +22,8 @@
     "ADR #1 and ADR #2 are explicitly marked as prerequisites for schema finalization and ingestion"
   ],
   "resources": [
-    "C:\\code\\elyos\\planning\\projects\\food-assistance-maps\\PLAN.md",
-    "C:\\code\\elyos\\packages\\schema\\src\\schemas.ts",
+    "C:\\code\\hee-lee-oss\\planning\\projects\\food-assistance-maps\\PLAN.md",
+    "C:\\code\\hee-lee-oss\\packages\\schema\\src\\schemas.ts",
     "https://docs.openreferral.org/",
     "https://opendatacommons.org/licenses/odbl/"
   ],

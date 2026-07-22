@@ -66,7 +66,7 @@ unclear-license aggregations that downstream helpers cannot legally or practical
 
 **Verified need / partner org: TO BE SECURED.** The *general* need is well-documented by public food-
 security statistics and the visible fragmentation of existing listings, so foundation work (M0–M1) is
-justified. But Elyos's "delivered, not merged" bar requires a **named beneficiary or partner**: we
+justified. But Hee-Lee Oss's "delivered, not merged" bar requires a **named beneficiary or partner**: we
 will treat the need as **plausible but unverified** until at least one named partner — a food-bank
 network, a 211/AIRS center, a community-action agency, or an established mutual-aid organization —
 confirms it in writing (letter of support or lightweight MOU), identifies a **priority region**, and
@@ -182,7 +182,7 @@ exists because no recipient data is ever collected.
    corroboration or one authoritative source; set `verification_method`, `verified_by`,
    `last_verified`, `confidence`, and the re-verification due date. Entries that don't clear the gate
    stay in a staging/"unverified" pool and are **not published as authoritative**.
-6. **Validate.** Build-time JSON-Schema validation (HSDS + Elyos provenance/freshness extension);
+6. **Validate.** Build-time JSON-Schema validation (HSDS + Hee-Lee Oss provenance/freshness extension);
    reject entries missing required citation/verification/license fields; reject recipient-PII fields.
 7. **Publish.** Emit HSDS JSON/CSV + GeoJSON + the directory/map view, plus a public freshness report
    and provenance log.
@@ -208,7 +208,7 @@ location) on a longer cadence. SLA windows are configurable per source reliabili
 - **Schema & validation:** TypeScript/ESM types generated from the HSDS + provenance/freshness JSON
   Schema; an `ajv`-based validator in the build/CI.
 - **Ingestion adapters:** one small, isolated adapter per source (vendor-/source-specific logic lives
-  in adapters, per Elyos architecture rules; the core model stays source-neutral).
+  in adapters, per Hee-Lee Oss architecture rules; the core model stays source-neutral).
 - **Pipeline core:** normalize → geocode → dedupe → verify → validate → publish, each idempotent and
   logged.
 - **Directory/map view:** static, accessible TS front end consuming the published GeoJSON/HSDS exports
@@ -219,7 +219,7 @@ location) on a longer cadence. SLA windows are configurable per source reliabili
 - **Build/CI:** pnpm workspace; lint, typecheck, unit, schema-validation, freshness report,
   a11y, and a **no-recipient-PII / no-tracker** audit.
 
-**Data model (entry, HSDS-aligned + Elyos extension).**
+**Data model (entry, HSDS-aligned + Hee-Lee Oss extension).**
 ```
 ServiceAtLocation {                 // HSDS core (subset)
   organization: { id, name, url, description }
@@ -229,7 +229,7 @@ ServiceAtLocation {                 // HSDS core (subset)
   service_area: [ region/zip constraints ]                                // e.g. "residents of zip X"
   contact:      { phone?, email?, public_only: true }                     // public org contacts only
 
-  // --- Elyos provenance + freshness extension (required to publish) ---
+  // --- Hee-Lee Oss provenance + freshness extension (required to publish) ---
   sources:            Citation[]   // { name, url, license, retrievedDate, attribution, shareAlike }
   verification_method: "official-source" | "operator-confirmed" | "partner-confirmed"
                        | "phone-confirmed" | "multi-source-corroborated" | "unverified"
@@ -365,11 +365,11 @@ an **accessible** directory/map view (WCAG 2.2 AA, automated + manual) and machi
 (5) sustains **≥90% freshness within SLA** and **≥95% audit accuracy** for at least one region, and
 (6) is **adopted/endorsed by a named partner** and/or demonstrably reused downstream. Until a partner
 is secured, criterion (6) is **outstanding** and the project is "publicly usable" but not yet
-"shipped" by Elyos's *delivered, not merged* bar.
+"shipped" by Hee-Lee Oss's *delivered, not merged* bar.
 
 **"Publicly shipped (no partner)" success state — so a finished dataset isn't stranded.** Criteria
 (1)–(5) can be fully met without any partner. If, by a **decision point set at 6 months after the M3
-build is production-ready**, no partner has been secured, the steward + Elyos governance may declare
+build is production-ready**, no partner has been secured, the steward + Hee-Lee Oss governance may declare
 **"Publicly Shipped (generic public good)"**: the dataset + view are deployed, announced, and offered
 to mutual-aid/civic channels, with accuracy/freshness maintained by best-effort community
 re-verification. A later partner endorsement **upgrades** the status rather than re-opening launch.
@@ -417,7 +417,7 @@ secured** (pursued in parallel from M0).
 ## Work breakdown
 
 The itemized, schema-mapped backlog lives in **TASKS.md**, organized by the M0–M3 milestones above.
-Each task maps to an Elyos Task JSON (per `packages/schema`), is sized (small/medium/large),
+Each task maps to a Hee-Lee Oss Task JSON (per `packages/schema`), is sized (small/medium/large),
 risk-tagged, and names a reviewer. TASKS.md also includes acceptance criteria for the most important
 tasks per milestone, milestone Definitions of Done, a backlog, and a complete example Task JSON
 (`verifiedNeed = false`, `requestor = "TBD"` until a partner is secured).
@@ -439,7 +439,7 @@ tasks per milestone, milestone Definitions of Done, a backlog, and a complete ex
 - **Partner / requestor: TO BE SECURED** — a named food-bank network, 211/AIRS center, community-action
   agency, or mutual-aid org confirming need, naming a priority region, and ideally assisting with
   human verification; ultimately endorsing/adopting.
-- **Elyos governance/board:** arbitrates edge cases, license disputes, and risk-tier decisions per the
+- **Hee-Lee Oss governance/board:** arbitrates edge cases, license disputes, and risk-tier decisions per the
   good-deed definition.
 
 ## Dependencies & integrations
@@ -451,7 +451,7 @@ tasks per milestone, milestone Definitions of Done, a backlog, and a complete ex
 - **Standards:** Open Referral **HSDS / HSDA** specification (the canonical schema + the interop seam).
 - **Tooling/libraries:** TypeScript/ESM, pnpm; `ajv` schema validation; a lightweight a11y-friendly UI
   framework + a map library; test stack (Vitest, Playwright, axe-core/pa11y); static hosting.
-- **Elyos pieces:** Task schema (`packages/schema`), CLI workspace prep / PR flow (donated lane),
+- **Hee-Lee Oss pieces:** Task schema (`packages/schema`), CLI workspace prep / PR flow (donated lane),
   optional `packages/runner` for an **escrow-capped funded** batch-ingestion sub-lane, good-deed
   definition & risk-tier governance, review/sign-off process. Overlaps with `community-resource-maps`
   (Track 6) — coordinate to share the schema/verification engine rather than fork it.
@@ -483,7 +483,7 @@ exposure, (4) license contamination, (5) third-party tracker/script creep, (6) h
 false endorsement.
 
 **Controls.**
-- **No secrets** in the app or repo (per Elyos rule). The funded batch sub-lane (if used) keeps its
+- **No secrets** in the app or repo (per Hee-Lee Oss rule). The funded batch sub-lane (if used) keeps its
   API key only in `packages/runner` env, never in logs/receipts/commits, under a hard escrow cap.
 - **No recipient PII, by construction:** the schema cannot represent client data; no accounts, no
   demand-side capture. **No telemetry/trackers** in the view, enforced by CSP and a runtime
@@ -537,11 +537,11 @@ false endorsement.
 
 ## References
 
-- Elyos work rules — `C:\code\elyos\CLAUDE.md`
-- Good-deed definition & risk tiers — `C:\code\elyos\docs\good-deed-definition.md`
-- Task schema — `C:\code\elyos\packages\schema\src\schemas.ts`
+- Hee-Lee Oss work rules — `C:\code\hee-lee-oss\CLAUDE.md`
+- Good-deed definition & risk tiers — `C:\code\hee-lee-oss\docs\good-deed-definition.md`
+- Task schema — `C:\code\hee-lee-oss\packages\schema\src\schemas.ts`
 - Portfolio roadmap (this project: Track 10; overlaps Track 6 `community-resource-maps`) —
-  `C:\code\elyos\planning\ROADMAP.md`
+  `C:\code\hee-lee-oss\planning\ROADMAP.md`
 - Open Referral — **Human Services Data Specification (HSDS)** and **HSDA** API (the canonical schema +
   interop standard).
 - OpenStreetMap — **Open Database License (ODbL) 1.0** (attribution + database share-alike).
@@ -594,7 +594,7 @@ in the body above (not merely proposed).
 17. **Made dedup keep the full source trail with a precedence rule** so merges can't hide a closure or
     erase provenance (§6, §Risks).
 18. **Defined an optional escrow-capped funded sub-lane** for large batch ingestion via
-    `packages/runner`, with a hard per-task budget cap, per Elyos funded-lane rules (§6, §12, §14).
+    `packages/runner`, with a hard per-task budget cap, per Hee-Lee Oss funded-lane rules (§6, §12, §14).
 19. **Added a runtime no-egress E2E + CSP** (not just a static grep) to enforce zero trackers on the
     view, matching the house standard (§4, §14).
 20. **Specified the accessibility support matrix and cadence** (NVDA/JAWS/VoiceOver/TalkBack +
